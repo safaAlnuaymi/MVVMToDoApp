@@ -20,6 +20,7 @@ class TodoListViewModel@Inject constructor(
      val todos = repository.getTodos()
 
     private val _uiEvent = Channel<UiEvent>()
+
     val uiEvent = _uiEvent.receiveAsFlow()
 
     private var deletedTodo: Todo? = null
@@ -28,11 +29,11 @@ class TodoListViewModel@Inject constructor(
     fun onEvent(event: TodoListEvent){
         when(event) {
             is TodoListEvent.OnTodoClick -> {
-                sentUiEvent(UiEvent.Navigate(Routes.ADD_EDIT_TODO + "?todoId=${event.todo.id}"))
+                sendUiEvent(UiEvent.Navigate(Routes.ADD_EDIT_TODO + "?todoId=${event.todo.id}"))
 
             }
             is TodoListEvent.OnAddTodoClick -> {
-                sentUiEvent(UiEvent.Navigate(Routes.ADD_EDIT_TODO))
+                sendUiEvent(UiEvent.Navigate(Routes.ADD_EDIT_TODO))
 
             }
             is TodoListEvent.OnUndoDeleteClick -> {
@@ -47,7 +48,7 @@ class TodoListViewModel@Inject constructor(
                 viewModelScope.launch {
                     deletedTodo = event.todo
                     repository.deleteTodo(event.todo)
-                    sentUiEvent(UiEvent.ShowSnackbar(
+                    sendUiEvent(UiEvent.ShowSnackbar(
                         message = "todo deleted",
                         action = "Undo"
                     ))
@@ -66,7 +67,7 @@ class TodoListViewModel@Inject constructor(
             }
         }
     }
-    private fun sentUiEvent(event: UiEvent){
+    private fun sendUiEvent(event: UiEvent){
         viewModelScope.launch {
             _uiEvent.send(event)
 
