@@ -20,7 +20,6 @@ class TodoListViewModel@Inject constructor(
      val todos = repository.getTodos()
 
     private val _uiEvent = Channel<UiEvent>()
-
     val uiEvent = _uiEvent.receiveAsFlow()
 
     private var deletedTodo: Todo? = null
