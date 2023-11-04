@@ -3,13 +3,13 @@ buildscript {
         compose_version = '1.0.5'
     }
     repositories {
-        ext.kotlin_version = '1.7.10'
+        ext.kotlin_version = '1.9.10'
         google()
         mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.0.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10"
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.48.1"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -23,7 +23,7 @@ buildscript {
 plugins {
     id 'com.android.application' version '8.0.2' apply false
     id 'com.android.library' version '8.0.2' apply false
-    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
+    id 'org.jetbrains.kotlin.android' version '1.9.10' apply false
 }
 
     task clean(type: Delete) {
